@@ -1,0 +1,23 @@
+-- SQL METHODOLOGY
+
+--  Let table name = annual_profit
+ 
+
+WITH
+clean_data as (
+   SELECT Year, Rank, Company, Revenue, TRY_CAST(Profit as float) as Profit
+   FROM annual_profit),
+profit_data as (
+   SELECT * FROM clean_data 
+   WHERE Profit is not null )
+   
+-- Get total count of data
+SELECT count(*) FROM annual_profit
+
+-- Get total count of clean data
+SELECT COUNT(*) FROM profit_data
+
+-- Get top 20 profit
+SELECT * FROM profit_data
+ORDER BY clean_profit desc
+LIMIT 20
