@@ -36,10 +36,12 @@ def convert_json(df):
     flocation = os.getcwd()+'\\data2.json'  
     print("\n\nCompleted!\n"); print(f"Output is in file ==> 'data2.json'\nCheck this location:\n{flocation}")
     
-def handler():
-    git_url = "https://gist.githubusercontent.com/bobbae/b4eec5b5cb0263e7e3e63a6806d045f2/raw/279b794a834a62dc108fc843a72c94c49361b501/data.csv"
+def handler(git_url):
     df = reader(git_url)
     df = cleaner(df)
     convert_json(df)
 
-if __name__ == "__main__":  handler()
+if __name__ == "__main__": 
+    try: url = sys.argv[1]
+    except: print("You need to pass the URL of the csv file!")
+    handler(url)
