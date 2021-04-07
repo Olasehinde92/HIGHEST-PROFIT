@@ -1,0 +1,45 @@
+import requests, json, os
+import pandas as pd
+
+def reader(url):            
+    #DIRECTLY PULL DATA FROM GITHUB WITH REQUESTS    
+    resp = requests.get(url).text
+    
+    #WRITE TO CSV FILE   
+    with open("github.csv", "w") as f: f.write(resp)
+
+    #READ DATA DIRECTLY INTO DATAFRAME
+    df = pd.read_csv("github.csv")
+    print(f"\nThe length of the dataframe is {len(df)} rows") 
+    return df
+    
+def cleaner(df):    
+    #CLEAN OUT NON-NUMERIC DATA   
+    df = df[pd.to_numeric(df['Profit (in millions)'], errors='coerce').notnull()]
+    print(f"\nThere are {len(df)} rows left after cleaning") 
+    
+    #SORT CLEAN LIST IN DESCENDING ORDER
+    top_profit = df.sort_values(by="Profit (in millions)", ascending=False)
+    
+    #PRINT TOP 20 PROFIT VALUES FROM SORTED LIST
+    print("\n\nThe Top Profits are: \n"); print(top_profit[:20])
+    return df
+
+def convert_json(df):
+    #CONVERT TO JSON    
+    json_df = json.loads(df.to_json(orient="table"))        
+       
+    #OUTPUT JSON FILE   
+    with open("data2.json", "w") as fp: json.dump(json_df, fp=fp, indent=3)     
+           
+    #FILE LOCATION    
+    flocation = os.getcwd()+'\\data2.json'  
+    print("\n\nCompleted!\n"); print(f"Output is in file ==> 'data2.json'\nCheck this location:\n{flocation}")
+    
+def handler():
+    git_url = "https://gist.githubusercontent.com/bobbae/b4eec5b5cb0263e7e3e63a6806d045f2/raw/279b794a834a62dc108fc843a72c94c49361b501/data.csv"
+    df = reader(git_url)
+    df = cleaner(df)
+    convert_json(df)
+
+if __name__ == "__main__":  handler()
