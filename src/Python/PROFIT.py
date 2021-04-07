@@ -44,6 +44,13 @@ def handler(git_url):
     convert_json(df)
 
 if __name__ == "__main__":
+    print("\n\n\n--------------------")
+    print("START CODE")
+    print("--------------------\n")
+
     try: url = sys.argv[1]
     except: print("You need to pass the URL of the csv file!")
     handler(url)
+    print("\n\n\n--------------------")
+    print("END")
+    print("--------------------\n\n\n")
