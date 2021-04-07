@@ -9,4 +9,4 @@ DEPENDENCIES:
 TO USE:
 1. Clone or export the repository to a location on your local computer
 2. Open up your terminal and cd into the directory the repo was exported/cloned in
-3. To run the code, run ./run.sh
+3. To run the code, run `./run.sh`
