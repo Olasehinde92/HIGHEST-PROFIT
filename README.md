@@ -9,4 +9,4 @@ The code reads, cleans and outputs the desired deliverables, then converts the d
 
 
 
-In this folder you will find a script file of the code, a text file showing the SQL methodology and a powerpoint presentation explaining what the code is doing.
+In this folder you will find a script file of the code named run.sh
