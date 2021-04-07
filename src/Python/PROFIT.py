@@ -1,5 +1,7 @@
-import requests, json, os, sys
-import pandas as pd
+import json, os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__)))
+import modules.pandas as pd
+import modules.requests as requests
 
 def reader(url):
     #DIRECTLY PULL DATA FROM GITHUB WITH REQUESTS    
